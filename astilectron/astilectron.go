@@ -2,6 +2,7 @@ package astilectron
 
 import (
 	"fmt"
+	"sync"
 
 	"github.com/asticode/go-astikit"
 	"github.com/asticode/go-astilectron"
@@ -32,8 +33,9 @@ func (a *Ast) SetWoption(height int, width int) {
 	option.Height = astikit.IntPtr(height)
 	option.Width = astikit.IntPtr(width)
 	a.Woption = &option
+	a.Woption.Frame = astikit.BoolPtr(false)
 }
-func (a *Ast) MakeWindow() {
+func (a *Ast) MakeWindow(wg *sync.WaitGroup) {
 	ast, err := astilectron.New(nil, a.Option)
 
 	if err != nil {
@@ -51,8 +53,11 @@ func (a *Ast) MakeWindow() {
 	if a.Window.Create(); err != nil {
 		fmt.Println(err)
 	}
+	go a.OpenListener()
+	go a.OpenSocekt()
+	a.Window.OpenDevTools()
 	a.Astilectron.Wait()
-
+	wg.Done()
 }
 
 func (a *Ast) OpenListener() {

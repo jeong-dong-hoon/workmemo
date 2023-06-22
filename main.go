@@ -15,9 +15,7 @@ func main() {
 	ast.Chan2 = chan2
 	ast.Setoption("WorkMemo", "/webresource")
 	ast.SetWoption(400, 400)
-	go ast.MakeWindow()
-	go ast.OpenSocekt()
-	go ast.OpenListener()
+	go ast.MakeWindow(&wg)
 	go MessageListener(chan1, chan2, &wg)
 	wg.Wait()
 }

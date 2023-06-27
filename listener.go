@@ -13,9 +13,12 @@ mainloop:
 		case "take":
 		case "save":
 			{
+				msg := astilectron.Message{}
 				for i := 0; i < len(m.Content); i++ {
 
 				}
+				msg.Code = "done"
+				sendmessage <- msg
 			}
 		case "done":
 			break mainloop

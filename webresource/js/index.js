@@ -1,7 +1,10 @@
 'use strict'
 
 let topmenu = document.getElementById("topmenu");
-let exitbtn = document.querySelector(".exitbtn")
+let exitbtn = document.querySelector(".exitbtn");
+let plusbtn = document.querySelector(".plusbtn");
+let textboard = document.getElementById("textboard");
+
 document.addEventListener('mouseover',(evt)=>{
     topmenu.classList.toggle('on')
     topmenu.style.top = '0px'

@@ -1,22 +1,32 @@
 'use strict'
 
 let message = {
-    Code :'done'
+    Code : ""
+    ,Content : []
 }
 document.addEventListener('astilectron-ready', function() {
-    // This will listen to messages sent by GO
+
     astilectron.onMessage(function(message) {
-        // Process message
+
         if (message === "hello") {
             return "world";
         }
     });
 })
 document.addEventListener('astilectron-ready', function() {
+    astilectron.onMessage(function(message) {
+        console.log(message)
+    });
     exitbtn.addEventListener('click',()=>{
-        astilectron.sendMessage(message, function(message) {
-           
-        });
+        message.Code = "done";
+        astilectron.sendMessage(message, ()=>{});
     })
+    
+    plusbtn.addEventListener('click',()=>{
+        message.Code = "save";
+        astilectron.sendMessage(message,()=>{});
+    }
+
+    )
    
 })

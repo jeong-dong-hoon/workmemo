@@ -76,6 +76,10 @@ func (a *Ast) OpenListener() {
 func (a *Ast) OpenSocekt() {
 	for {
 		m := <-a.Chan2
-		a.Window.SendMessage(m)
+		fmt.Println(m)
+		if err := a.Window.SendMessage(m); err != nil {
+			fmt.Println(err)
+		}
+
 	}
 }

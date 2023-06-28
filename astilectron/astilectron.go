@@ -18,7 +18,7 @@ type Ast struct {
 }
 type Message struct {
 	Code    string
-	Content map[int]interface{}
+	Content string
 }
 
 func (a *Ast) Setoption(name string, Dirpath string) {

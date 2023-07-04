@@ -67,7 +67,6 @@ func (a *Ast) OpenListener() {
 		a.Window.OnMessage(func(m *astilectron.EventMessage) interface{} {
 			s := Message{}
 			m.Unmarshal(&s)
-			fmt.Println(s)
 			a.Chan1 <- s
 			return nil
 		})
@@ -76,7 +75,6 @@ func (a *Ast) OpenListener() {
 func (a *Ast) OpenSocekt() {
 	for {
 		m := <-a.Chan2
-		fmt.Println(m)
 		if err := a.Window.SendMessage(m); err != nil {
 			fmt.Println(err)
 		}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"strings"
 	"sync"
 	"workmemo/astilectron"
 	"workmemo/textread"
@@ -30,7 +31,10 @@ func tmpread() astilectron.Message {
 	data := textread.StartRead()
 	txt.Write(data)
 	content = txt.String()
-	msg.Content = content
+	encodedata := strings.ReplaceAll(content, "\"", "")
+	encodedata = strings.ReplaceAll(encodedata, "\\n", "")
+	encodedata = strings.ReplaceAll(encodedata, "\\", "")
+	msg.Content = encodedata
 	msg.Code = "first"
 	return msg
 }

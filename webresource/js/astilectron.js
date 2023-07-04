@@ -7,9 +7,9 @@ let message = {
 document.addEventListener('astilectron-ready', function() {
 
     astilectron.onMessage(function(message) {
-        console.log(message)
         if(message.Code == 'first') {
-            textboard.contentWindow.document.querySelector('.content').innerHTML = ``;
+            textboard.contentWindow.document.querySelector('.content').innerHTML = message.Content;
+            message.Content = "";
         }
     });
 })
@@ -19,8 +19,11 @@ document.addEventListener('astilectron-ready', function() {
     });
     exitbtn.addEventListener('click',()=>{
         message.Code = "done";
+        // message.Code = "test";
         message.Content = textboard.contentWindow.document.querySelector('.content').innerHTML;
+        
         astilectron.sendMessage(message, ()=>{});
+        message.Content = "";
     })
     
     plusbtn.addEventListener('click',()=>{
